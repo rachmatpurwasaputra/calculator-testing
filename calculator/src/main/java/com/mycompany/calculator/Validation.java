@@ -21,8 +21,8 @@ public class Validation{
         }
 
         // Validasi operator yang diizinkan
-        if (operator.equals("+") && operator.equals("-") 
-             && operator.equals("*") && operator.equals("/"))
+        if (!operator.equals("+") && !operator.equals("-") 
+             && !operator.equals("*") && !operator.equals("/"))
         {            
             throw new IllegalArgumentException("Operator tidak valid.");
         }
