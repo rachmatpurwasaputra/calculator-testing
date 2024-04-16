@@ -16,7 +16,7 @@ public class Main {
         int operand2 = Integer.parseInt(System.console().readLine());
 
         System.out.println("Input operator ");
-        char operatorChar = System.console().readLine().charAt(0);
+        String operatorChar = System.console().readLine();
 
         int result;
         try {

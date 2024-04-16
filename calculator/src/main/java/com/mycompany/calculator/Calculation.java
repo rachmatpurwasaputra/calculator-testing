@@ -15,22 +15,22 @@ package com.mycompany.calculator;
  * @author Kelompok B1 (Rafi, Rachmat, Raihan)
  */
 public class Calculation {
-    public int calculate(int operand1, int operand2, char operator) {
+    public int calculate(int operand1, int operand2, String operator) {
         int result = 0; // inisialisasi result
 
         Operator operatorObj = new Operator();
 
         switch (operator) {
-            case '+':
+            case "+":
                 result = operatorObj.add(operand1, operand2);
                 break;
-            case '-':
+            case "-":
                 result =  operatorObj.subtract(operand1, operand2);
                 break;
-            case '*':
+            case "*":
                 result =  operatorObj.multiply(operand1, operand2);;
                 break;
-            case '/':
+            case "/":
                 result =  operatorObj.divide(operand1, operand2);
                 break;
         }
