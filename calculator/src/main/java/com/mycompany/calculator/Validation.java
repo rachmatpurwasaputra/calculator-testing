@@ -28,7 +28,7 @@ public class Validation{
         }
 
         // Validasi pembagian dengan nol
-        if (!operator.equals("/") && operand2 == 0) {
+        if (operator.equals("/") && operand2 == 0) {
             throw new Exception("Pembagi tidak boleh bernilai nol.");
         }
 
