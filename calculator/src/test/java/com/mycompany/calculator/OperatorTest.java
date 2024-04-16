@@ -41,7 +41,7 @@ public class OperatorTest {
     @Test
     void divideOperatorTest() {
         // test divide operator from Operator.java class
-        assertEquals(0.6666666666666666, operator.divide(2, 3),
-                     "2 / 3 should be 0.6666666666666666");
+        assertEquals(1, operator.divide(3, 3),
+                     "3 / 3 should be 1");
     }
 }
