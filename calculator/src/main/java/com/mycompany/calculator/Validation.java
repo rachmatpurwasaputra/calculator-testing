@@ -21,14 +21,14 @@ public class Validation{
         }
 
         // Validasi operator yang diizinkan
-        if (operator.equals("+") && operator.equals("-") 
-             && operator.equals("*") && operator.equals("/"))
+        if (!operator.equals("+") && !operator.equals("-") 
+             && !operator.equals("*") && !operator.equals("/"))
         {            
             throw new IllegalArgumentException("Operator tidak valid.");
         }
 
         // Validasi pembagian dengan nol
-        if (operator.equals("/") && operand2 == 0) {
+        if (!operator.equals("/") && operand2 == 0) {
             throw new Exception("Pembagi tidak boleh bernilai nol.");
         }
 
