@@ -21,4 +21,27 @@ public class OperatorTest {
         assertEquals(5, operator.add(2, 3),
                      "2 + 3 should be 5");
     }
+    @DisplayName("Test Operator subtraction (-) class")
+    @Test
+    void subtractOperatorTest() {
+        // test subtract operator from Operator.java class
+        assertEquals(-1, operator.subtract(2, 3),
+                     "2 - 3 should be -1");
+    }
+
+    @DisplayName("Test Operator multiplication (*) class")
+    @Test
+    void multiplyOperatorTest() {
+        // test multiply operator from Operator.java class
+        assertEquals(6, operator.multiply(2, 3),
+                     "2 * 3 should be 6");
+    }
+
+    @DisplayName("Test Operator division (/) class")
+    @Test
+    void divideOperatorTest() {
+        // test divide operator from Operator.java class
+        assertEquals(0.6666666666666666, operator.divide(2, 3),
+                     "2 / 3 should be 0.6666666666666666");
+    }
 }
