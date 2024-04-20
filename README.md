@@ -51,3 +51,7 @@ mvn surefire-report:report
 ```
 ## Attribution
 This repository is maintained by Kelompok B1 Kelas 3B DIV-Teknik Informatika Politeknik Negeri Bandung.
+Anggota:
+    - Muhammad Rafi Farhan     (211524051)
+    - Rachmat Purwa Saputra    (211524054)
+    - Reihan Hadi Fauzan       (211524058)
