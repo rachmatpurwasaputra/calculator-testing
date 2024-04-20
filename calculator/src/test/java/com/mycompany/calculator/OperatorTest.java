@@ -44,4 +44,12 @@ public class OperatorTest {
         assertEquals(1, operator.divide(3, 3),
                      "3 / 3 should be 1");
     }
+
+    @DisplayName("Test Operator division (/) class")
+    @Test
+    void divideOperatorTest2() {
+        // test divide operator from Operator.java class
+        assertEquals(1.5, operator.divide(3, 2),
+                     "3 / 2 should be 1.5");
+    }
 }

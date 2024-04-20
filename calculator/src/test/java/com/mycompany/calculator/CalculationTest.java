@@ -32,4 +32,11 @@ public class CalculationTest {
         int result = calculation.calculate(6, 3, "/");
         assertEquals(2, result);
     }
+
+    @Test
+    public void testDivision2() {
+        Calculation calculation = new Calculation();
+        double result = calculation.calculate(5, 2, "/");
+        assertEquals(2.5, result);
+    }
 }
