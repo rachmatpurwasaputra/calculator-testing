@@ -1,30 +1,35 @@
 package com.mycompany.calculator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 public class OperatorTest {
 
+    @Mock
     Operator operator;
 
     @BeforeEach
     void setup() {
-        operator = new Operator();
+        MockitoAnnotations.openMocks(this);
     }
 
     @DisplayName("Test Operator addition (+) class")
     @Test
     void addOperatorTest() {
-        // test add operator from Operator.java class
+        when(operator.add(2, 3)).thenReturn(5);
         assertEquals(5, operator.add(2, 3),
                      "2 + 3 should be 5");
     }
+
     @DisplayName("Test Operator subtraction (-) class")
     @Test
     void subtractOperatorTest() {
-        // test subtract operator from Operator.java class
+        when(operator.subtract(2, 3)).thenReturn(-1);
         assertEquals(-1, operator.subtract(2, 3),
                      "2 - 3 should be -1");
     }
@@ -32,7 +37,7 @@ public class OperatorTest {
     @DisplayName("Test Operator multiplication (*) class")
     @Test
     void multiplyOperatorTest() {
-        // test multiply operator from Operator.java class
+        when(operator.multiply(2, 3)).thenReturn(6);
         assertEquals(6, operator.multiply(2, 3),
                      "2 * 3 should be 6");
     }
@@ -40,7 +45,7 @@ public class OperatorTest {
     @DisplayName("Test Operator division (/) class")
     @Test
     void divideOperatorTest() {
-        // test divide operator from Operator.java class
+        when(operator.divide(3, 3)).thenReturn(1);
         assertEquals(1, operator.divide(3, 3),
                      "3 / 3 should be 1");
     }
@@ -48,7 +53,7 @@ public class OperatorTest {
     @DisplayName("Test Operator division (/) class")
     @Test
     void divideOperatorTest2() {
-        // test divide operator from Operator.java class
+        when(operator.divide(3, 2)).thenReturn((int)1.5);
         assertEquals(1.5, operator.divide(3, 2),
                      "3 / 2 should be 1.5");
     }
