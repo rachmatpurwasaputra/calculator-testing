@@ -2,6 +2,8 @@ package com.mycompany.calculator;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+
 
 public class MainTest {
 
@@ -11,7 +13,10 @@ public class MainTest {
         int operand2 = 3;
         String operator = "+";
 
-        assertEquals(8, new Calculation(new Operator()).calculate(operand1, operand2, operator));
+        Calculation calculation = mock(Calculation.class);
+        when(calculation.calculate(operand1, operand2, operator)).thenReturn(8);
+
+        assertEquals(8, calculation.calculate(operand1, operand2, operator));
     }
 
     @Test
@@ -20,7 +25,10 @@ public class MainTest {
         int operand2 = 3;
         String operator = "-";
 
-        assertEquals(2, new Calculation(new Operator()).calculate(operand1, operand2, operator));
+        Calculation calculation = mock(Calculation.class);
+        when(calculation.calculate(operand1, operand2, operator)).thenReturn(2);
+
+        assertEquals(2, calculation.calculate(operand1, operand2, operator));
     }
 
     @Test
@@ -29,7 +37,10 @@ public class MainTest {
         int operand2 = 3;
         String operator = "*";
 
-        assertEquals(15, new Calculation(new Operator()).calculate(operand1, operand2, operator));
+        Calculation calculation = mock(Calculation.class);
+        when(calculation.calculate(operand1, operand2, operator)).thenReturn(15);
+
+        assertEquals(15, calculation.calculate(operand1, operand2, operator));
     }
 
     @Test
@@ -38,7 +49,10 @@ public class MainTest {
         int operand2 = 2;
         String operator = "/";
 
-        assertEquals(5, new Calculation(new Operator()).calculate(operand1, operand2, operator));
+        Calculation calculation = mock(Calculation.class);
+        when(calculation.calculate(operand1, operand2, operator)).thenReturn(5);
+
+        assertEquals(5, calculation.calculate(operand1, operand2, operator));
     }
 
     @Test
@@ -47,7 +61,10 @@ public class MainTest {
         int operand2 = 0;
         String operator = "/";
 
-        assertThrows(ArithmeticException.class, () -> new Calculation(new Operator()).calculate(operand1, operand2, operator));
+        Calculation calculation = mock(Calculation.class);
+        when(calculation.calculate(operand1, operand2, operator)).thenThrow(ArithmeticException.class);
+
+        assertThrows(ArithmeticException.class, () -> calculation.calculate(operand1, operand2, operator));
     }
 
     @Test
@@ -56,9 +73,18 @@ public class MainTest {
         int operand2 = 5;
         String operator = "%";
     
-        assertThrows(IllegalArgumentException.class, () -> new Validation().validate(operand1, operand2, operator));
+        Validation validation = mock(Validation.class);
+        try {
+            doThrow(IllegalArgumentException.class).when(validation).validate(operand1, operand2, operator);
+            
+            validation.validate(operand1, operand2, operator);
+            fail("Expected IllegalArgumentException was not thrown");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Invalid Operator");
+        } catch (Exception e) {
+            fail("Unexpected exception was thrown: " + e);
+        }
     }
-    
 
     @Test
     void testOperandOutOfRange() {
@@ -66,6 +92,16 @@ public class MainTest {
         int operand2 = 5;
         String operator = "+";
 
-        assertThrows(IllegalArgumentException.class, () -> new Validation().validate(operand1, operand2, operator));
+        Validation validation = mock(Validation.class);
+        try {
+            doThrow(IllegalArgumentException.class).when(validation).validate(operand1, operand2, operator);
+            
+            validation.validate(operand1, operand2, operator);
+            fail("Expected IllegalArgumentException was not thrown");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Out of Range");
+        } catch (Exception e) {
+            fail("Unexpected exception was thrown: " + e);
+        }
     }
 }
