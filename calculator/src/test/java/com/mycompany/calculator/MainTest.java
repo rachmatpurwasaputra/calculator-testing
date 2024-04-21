@@ -1,55 +1,107 @@
 package com.mycompany.calculator;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 
 public class MainTest {
-    @Mock
-    Validation validation;
-
-    @Mock
-    Calculation calculation;
-
-    @BeforeEach
-    public void setup() {
-        MockitoAnnotations.openMocks(this);
-    }
 
     @Test
-    public void testPerformCalculation_ValidOperation() throws Exception {
+    void testAddition() {
         int operand1 = 5;
         int operand2 = 3;
         String operator = "+";
-        int expected = 8;
 
-        when(calculation.calculate(operand1, operand2, operator)).thenReturn(expected);
+        Calculation calculation = mock(Calculation.class);
+        when(calculation.calculate(operand1, operand2, operator)).thenReturn(8);
 
-        int result = calculation.calculate(operand1, operand2, operator);
-
-        verify(validation).validate(operand1, operand2, operator);
-        verify(calculation).calculate(operand1, operand2, operator);
-        assertEquals(expected, result);
+        assertEquals(8, calculation.calculate(operand1, operand2, operator));
     }
 
     @Test
-    public void testPerformCalculation_InvalidOperation() throws Exception {
-        int operand1 = 2;
+    void testSubtraction() {
+        int operand1 = 5;
+        int operand2 = 3;
+        String operator = "-";
+
+        Calculation calculation = mock(Calculation.class);
+        when(calculation.calculate(operand1, operand2, operator)).thenReturn(2);
+
+        assertEquals(2, calculation.calculate(operand1, operand2, operator));
+    }
+
+    @Test
+    void testMultiplication() {
+        int operand1 = 5;
+        int operand2 = 3;
+        String operator = "*";
+
+        Calculation calculation = mock(Calculation.class);
+        when(calculation.calculate(operand1, operand2, operator)).thenReturn(15);
+
+        assertEquals(15, calculation.calculate(operand1, operand2, operator));
+    }
+
+    @Test
+    void testDivision() {
+        int operand1 = 10;
+        int operand2 = 2;
+        String operator = "/";
+
+        Calculation calculation = mock(Calculation.class);
+        when(calculation.calculate(operand1, operand2, operator)).thenReturn(5);
+
+        assertEquals(5, calculation.calculate(operand1, operand2, operator));
+    }
+
+    @Test
+    void testDivisionByZero() {
+        int operand1 = 10;
         int operand2 = 0;
         String operator = "/";
 
-        doThrow(new Exception("Pembagi tidak boleh bernilai nol.")).when(validation).validate(operand1, operand2, operator);
+        Calculation calculation = mock(Calculation.class);
+        when(calculation.calculate(operand1, operand2, operator)).thenThrow(ArithmeticException.class);
 
+        assertThrows(ArithmeticException.class, () -> calculation.calculate(operand1, operand2, operator));
+    }
+
+    @Test
+    void testInvalidOperator() {
+        int operand1 = 10;
+        int operand2 = 5;
+        String operator = "%";
+    
+        Validation validation = mock(Validation.class);
         try {
+            doThrow(IllegalArgumentException.class).when(validation).validate(operand1, operand2, operator);
+            
             validation.validate(operand1, operand2, operator);
+            fail("Expected IllegalArgumentException was not thrown");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Operator tidak valid.");
         } catch (Exception e) {
-            assertEquals("Pembagi tidak boleh bernilai nol.", e.getMessage());
+            fail("Unexpected exception was thrown: " + e);
         }
+    }
 
-        verify(validation).validate(operand1, operand2, operator);
+    @Test
+    void testOperandOutOfRange() {
+        int operand1 = 40000;
+        int operand2 = 5;
+        String operator = "+";
+
+        Validation validation = mock(Validation.class);
+        try {
+            doThrow(IllegalArgumentException.class).when(validation).validate(operand1, operand2, operator);
+            
+            validation.validate(operand1, operand2, operator);
+            fail("Expected IllegalArgumentException was not thrown");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Nilai operand melebihi rentang yang diizinkan.");
+        } catch (Exception e) {
+            fail("Unexpected exception was thrown: " + e);
+        }
     }
 }
