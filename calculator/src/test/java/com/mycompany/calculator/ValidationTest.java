@@ -86,7 +86,7 @@ public class ValidationTest {
     @DisplayName("Test Validation when doing division with zero as operand2")
     @Test
     void validateDivisionByZeroTest() {
-        exception = assertThrows(Exception.class, () -> {
+        exception = assertThrows(ArithmeticException.class, () -> {
             validation.validate(10, 0, "/");
         });
 
