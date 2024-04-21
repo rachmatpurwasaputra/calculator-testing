@@ -15,23 +15,27 @@ package com.mycompany.calculator;
  * @author Kelompok B1 (Rafi, Rachmat, Raihan)
  */
 public class Calculation {
+    private final Operator operator;
+
+    public Calculation(Operator operator) {
+        this.operator = operator;
+    }
+
     public int calculate(int operand1, int operand2, String operator) {
         int result = 0; // inisialisasi result
 
-        Operator operatorObj = new Operator();
-
         switch (operator) {
             case "+":
-                result = operatorObj.add(operand1, operand2);
+                result = this.operator.add(operand1, operand2);
                 break;
             case "-":
-                result =  operatorObj.subtract(operand1, operand2);
+                result =  this.operator.subtract(operand1, operand2);
                 break;
             case "*":
-                result =  operatorObj.multiply(operand1, operand2);;
+                result =  this.operator.multiply(operand1, operand2);;
                 break;
             case "/":
-                result =  operatorObj.divide(operand1, operand2);
+                result =  this.operator.divide(operand1, operand2);
                 break;
         }
 

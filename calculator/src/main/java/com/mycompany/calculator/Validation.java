@@ -29,7 +29,7 @@ public class Validation{
 
         // Validasi pembagian dengan nol
         if (operator.equals("/") && operand2 == 0) {
-            throw new Exception("Pembagi tidak boleh bernilai nol.");
+            throw new ArithmeticException("Pembagi tidak boleh bernilai nol.");
         }
 
         return true; // valid semua, operasi perhitungan bisa dijalankan
