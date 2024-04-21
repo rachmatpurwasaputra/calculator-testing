@@ -44,6 +44,14 @@ Run this command within your terminal/CLI (make sure you are currently in /calcu
 ```bash
 mvn test
 ```
+Run this command to generate the report using its standalone goal:
 
+```bash
+mvn surefire-report:report 
+```
 ## Attribution
 This repository is maintained by Kelompok B1 Kelas 3B DIV-Teknik Informatika Politeknik Negeri Bandung.
+Anggota:
+- Muhammad Rafi Farhan     (211524051)
+- Rachmat Purwa Saputra    (211524054)
+- Reihan Hadi Fauzan       (211524058)

@@ -23,7 +23,7 @@ public class Main {
             Validation validation = new Validation();
             validation.validate(operand1, operand2, operatorChar);
             
-            Calculation calculation = new Calculation();
+            Calculation calculation = new Calculation(new Operator());
             result = calculation.calculate(operand1, operand2, operatorChar);
 
             System.out.println("Hasil perhitungan >>> " + result);
