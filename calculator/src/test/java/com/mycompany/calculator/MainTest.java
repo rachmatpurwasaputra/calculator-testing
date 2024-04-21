@@ -1,44 +1,55 @@
 package com.mycompany.calculator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.*;
+
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 public class MainTest {
-    private Main calculator;
+    @Mock
+    Validation validation;
+
+    @Mock
+    Calculation calculation;
 
     @BeforeEach
-    public void setUp() {
-        calculator = new Main();
+    public void setup() {
+        MockitoAnnotations.openMocks(this);
     }
 
     @Test
-    @DisplayName("Test addition")
-    public void testAddition() {
-        int result = calculator.add(2, 3);
-        assertEquals(5, result);
+    public void testPerformCalculation_ValidOperation() throws Exception {
+        int operand1 = 5;
+        int operand2 = 3;
+        String operator = "+";
+        int expected = 8;
+
+        when(calculation.calculate(operand1, operand2, operator)).thenReturn(expected);
+
+        int result = calculation.calculate(operand1, operand2, operator);
+
+        verify(validation).validate(operand1, operand2, operator);
+        verify(calculation).calculate(operand1, operand2, operator);
+        assertEquals(expected, result);
     }
 
     @Test
-    @DisplayName("Test subtraction")
-    public void testSubtraction() {
-        int result = calculator.subtract(5, 3);
-        assertEquals(2, result);
-    }
+    public void testPerformCalculation_InvalidOperation() throws Exception {
+        int operand1 = 2;
+        int operand2 = 0;
+        String operator = "/";
 
-    @Test
-    @DisplayName("Test multiplication")
-    public void testMultiplication() {
-        int result = calculator.multiply(2, 3);
-        assertEquals(6, result);
-    }
+        doThrow(new Exception("Pembagi tidak boleh bernilai nol.")).when(validation).validate(operand1, operand2, operator);
 
-    @Test
-    @DisplayName("Test division")
-    public void testDivision() {
-        double result = calculator.divide(10, 2);
-        assertEquals(5.0, result);
+        try {
+            validation.validate(operand1, operand2, operator);
+        } catch (Exception e) {
+            assertEquals("Pembagi tidak boleh bernilai nol.", e.getMessage());
+        }
+
+        verify(validation).validate(operand1, operand2, operator);
     }
-   
 }
